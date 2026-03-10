@@ -2,14 +2,74 @@
 title: "Assignment 1"
 ---
 
-# Assignment 1
-
-```{r}
-1 + 1
-```
-
 My first assignment has two parts.
 
 ## (a)
 
+In the video called "Veri Bilimi ve Endüstri Mühendisliği Üzerine Sohbetler - Baykal Hafızoğlu & Erdi Daşdemir", Baykal Hafızoğlu talks about the operational challenges and critical success factors for data analytics and operations research projects. Hafızoğlu talks about data analytics in four different frameworks: descriptive, diagnostic, predictive, and prescriptive analytics. Hafızoğlu stresses that "Every project starts with a clear and quantifiable problem definition." Some key points from this video include: "The actual model creation, optimization piece of a project is only 1%, while the remaining 99% is actually 'dirty work', so that the model actually reaches the user." Hafızoğlu says that "A model can be mathematically optimal but still be considered a failure if it does not deploy or if it does deploy but lacks explainability such that, we can’t actually show cause and effect."
+
+Open Ended Question: Why is defining a "quantifiable KPI" is essential before starting any analytics project, and how does this impact the communication with non-technical stakeholders?
+
+Answer:
+
+Defining a quantifiable KPI is essential because it translates complex business problems into a common, objective language. Stakeholders often provide overwhelming, unstructured information, and without a specific metric, it is difficult to align on goals. Establishing a measurable KPI allows both technical teams and stakeholders to agree on a specific target, making success criteria clear and measurable.
+
+Multiple Choice Question: When categorizing analytics into four frameworks, which method is described as being analogous to a doctor writing a prescription for a patient, as it suggests specific actions to be taken to solve a problem?
+
+A)  Descriptive Analytics
+
+B)  Diagnostic Analytics
+
+C)  Predictive Analytics
+
+D)  Prescriptive Analytics
+
+Answer: D) Prescriptive Analytics
+
+**Note:** AI tools were used to create the questions. The prompt was: "Can you create one open ended and one multiple choice question with their answers according to the transcript that I will give you."
+
+
+
 ## (b)
+
+```{r}
+library(dslabs)
+data("polls_us_election_2016")
+my_first <- "Furkan"
+my_birth_year <- 2004
+k <- (nchar(my_first) + my_birth_year) %% 15 + 8
+if (k %% 2 == 0) {
+  head(polls_us_election_2016, k)
+} else {
+  tail(polls_us_election_2016, k)
+}
+sum(is.na(polls_us_election_2016))
+sort(colSums(is.na(polls_us_election_2016)), decreasing = TRUE)[1:8]
+
+copied_data <- polls_us_election_2016
+
+for(i in 1:ncol(copied_data)) {
+  if(class(copied_data[[i]]) == "numeric") {
+    copied_data[[i]] <- ifelse(is.na(copied_data[[i]]), my_birth_year + k, copied_data[[i]])
+  } else {
+    copied_data[[i]] <- ifelse(is.na(copied_data[[i]]), paste0(my_first, k), copied_data[[i]])
+  }
+}
+
+if (k %% 2 == 0) {
+  head(copied_data, k)
+} else {
+  tail(copied_data, k)
+}
+anyNA(copied_data)
+
+
+
+
+
+
+
+
+
+```
+
